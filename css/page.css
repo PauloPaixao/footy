@@ -1,0 +1,17 @@
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) {
+    /* STYLES GO HERE */
+    list { display: none;}  
+
+}
+
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 812px) 
+
+and (orientation : portrait) { 
+    list { display: none;}    
+    /* STYLES GO HERE */ 
+
+}
