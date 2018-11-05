@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SVC10-3</title>
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+      crossorigin="anonymous">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <script src="main.js"></script>    
+    <style>
+        html { 
+            background: url(img/henrique-macedo-457119-unsplash.jpg) no-repeat center center; 
+            background-size: 50%;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        .player{
+            width:100px;
+            height:100px;
+            background-color:#FFFFFF;
+
+        }
+        body {
+            overflow:hidden;
+        }
+
+        .container {
+            display: grid;
+           /* grid-template-columns: auto auto auto auto; */
+           grid-template-columns: 400px auto auto auto auto auto;
+            grid-column-gap: 1rem;
+            grid-row-gap: 1rem;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .droppable {
+            width: 5rem;
+            height: 5rem;
+            max-height: 5rem;
+            border: 2px dotted #FF0;
+            border-radius: 3px;
+            padding: 0.5rem;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .list {
+            background: #e2e4e6;
+            width: 150px;
+            height: 700px;
+            border-radius: 3px;
+            cursor: pointer;
+            min-height: 700px;
+            overflow-y: scroll;
+        }
+
+        .list-title {
+            margin: 0;
+            padding: 0.4rem 0.7rem;
+        }
+
+        .cards {
+            padding: 0.6rem;
+        }
+
+        .list-card {
+            background: #FFFFFF;
+            border-radius: 3px;
+            padding: 6px 6px 2px 8px;
+            margin-bottom: 0.1rem;
+        }
+
+        .list-card p {
+            font-size: 0.85rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .badge.is-complete {
+            background-color: #61bd4f;
+            color: #fff;
+            border-radius: 3px;
+            padding: 0.3rem 0.5rem;;
+            font-size: 0.7rem;
+            display: inline-block;
+        }
+        .disabled {
+            border:none;
+        }
+    </style>
+</head>
+<body>
+    <div style="height:100px">
+            <img src="img/logo.png" style="height:100%;padding-left:40px;" />
+    </div>
+    <div class="container">
+        <div class="droppable disabled">
+          <div id='list' class="list">
+                
+            <div class="heading">
+              <h4 class="list-title">SVC-08 10-3</h4>
+            </div>
+            <div class="cards">
+              <div class="list-card" draggable="true" ondragstart="dragStart(event)">
+                <p>Thijmen</p>
+                <span class="js-badges">
+                  <div class="badge is-complete">
+                    <span class="badge-icon">
+                      <img src="img/football.png" style="width:100%" />
+                    </span>
+                  </div>
+                </span>
+              </div>
+              <div class="list-card" draggable="true" ondragstart="dragStart(event)">
+                <p>Castor</p>
+                <span class="js-badges">
+                  <div class="badge is-complete">
+                    <span class="badge-icon">
+                        <img src="img/football.png" style="width:100%" />
+                    </span>
+                  </div>
+                </span>
+              </div>
+              <div class="list-card" draggable="true" ondragstart="dragStart(event)">
+                <p>Abel</p>
+                <span class="js-badges">
+                  <div class="badge is-complete">
+                    <span class="badge-icon">
+                        <img src="img/football.png" style="width:100%" />
+                    </span>
+                  </div>
+                </span>
+              </div>
+              <div class="list-card" draggable="true" ondragstart="dragStart(event)">
+                <p>Enzo</p>
+                <span class="js-badges">
+                  <div class="badge is-complete">
+                    <span class="badge-icon">
+                        <img src="img/football.png" style="width:100%" />
+                    </span>
+                  </div>
+                </span>
+              </div>
+              <div class="list-card" draggable="true" ondragstart="dragStart(event)">
+                <p>Jelmer</p>
+                <span class="js-badges">
+                  <div class="badge is-complete">
+                    <span class="badge-icon">
+                        <img src="img/football.png" style="width:100%" />
+                    </span>
+                  </div>
+                </span>
+              </div>
+              <div class="list-card" draggable="true" ondragstart="dragStart(event)">
+                <p>Luuk</p>
+                <span class="js-badges">
+                  <div class="badge is-complete">
+                    <span class="badge-icon">
+                        <img src="img/football.png" style="width:100%" />
+                    </span>
+                  </div>
+                </span>
+              </div>
+              <div class="list-card" draggable="true" ondragstart="dragStart(event)">
+                <p>Vince</p>
+                <span class="js-badges">
+                  <div class="badge is-complete">
+                    <span class="badge-icon">
+                        <img src="img/football.png" style="width:100%" />
+                    </span>
+                  </div>
+                </span>
+              </div>
+              <div class="list-card" draggable="true" ondragstart="dragStart(event)">
+                <p>Robi</p>
+                <span class="js-badges">
+                  <div class="badge is-complete">
+                    <span class="badge-icon">
+                        <img src="img/football.png" style="width:100%" />
+                    </span>
+                  </div>
+                </span>
+              </div>              
+            </div>
+          </div>
+        </div>
+        
+        <div class="droppable disabled"></div>
+        <div class="droppable disabled"></div>
+        <div class="droppable disabled"></div>
+        <div class="droppable disabled"></div>
+        <div class="droppable disabled"></div>
+        <div class="droppable disabled"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled " ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+        <div class="droppable disabled" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+    </div>
+
+</body>
+
+</html>
