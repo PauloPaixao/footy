@@ -14,15 +14,20 @@ const dragStart = (event) => {
         // TODO Remove From List
     }
   }
-  
+ 
+  var x ;
   const drop = (event) => {
-
     event.preventDefault();
     const data = event.dataTransfer.getData("text/plain");
-    console.log(data);
+    //console.log(data);
+    console.log(  event)
     
     //const element = document.querySelector(`#${data}`);
     event.currentTarget.style.background = 'white'
+    event.currentTarget.innerHTML = "<img src='"+data+"' style='width:100%' />"; // "DONE " + data;
+    
+    //event.srcElement.setAttribute("style","display:none");
+    
     try {
       event.target.appendChild(element);
     } catch (error) {
