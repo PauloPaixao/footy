@@ -17,6 +17,15 @@
             -o-background-size: cover;
             background-size: cover;
         }
+
+
+        @media only screen 
+        and (min-device-width: 320px) 
+        and (max-device-width: 667px) 
+         { 
+            .ui-draggable { width:32px;}
+        }
+
     </style>
 </head>
 <body>
@@ -34,14 +43,38 @@
 </body>
 <script>
     $("img").draggable();
+    var team = [];
+
+    function randomIntFromInterval(min,max) // min and max included
+    {
+        return Math.floor(Math.random()*(max-min+1)+min);
+    }
 
     function test() {
+        
         $("img").each(function(e,i) {
             var name = i.getAttribute("alt");
+            var image = i.getAttribute("src");
             var rect = i.getBoundingClientRect();
-            console.log(name,rect.top, rect.right, rect.bottom, rect.left);
+            var player = { name: name, image : image, top: rect.top, left:rect.left };
+            team.push(player);
+            //console.log(name, image,rect.top, rect.right, rect.bottom, rect.left);
         });
     }
+
+    function test1() {
+        $("img").each(function(e,i) {
+            var name = i.getAttribute("alt");
+            var image = i.getAttribute("src");
+            var rect = i.getBoundingClientRect();
+            i.style.marginLeft = rect.left + randomIntFromInterval(0, 100) + "px";
+            i.style.maringTop = rect.top + randomIntFromInterval(0,100) + "px";
+            //var player = { name: name, image : image, top: rect.top, left:rect.left };
+            //team.push(player);
+            //console.log(name, image,rect.top, rect.right, rect.bottom, rect.left);
+        });
+    }
+
 
 </script>
 </html>
