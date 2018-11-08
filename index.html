@@ -423,9 +423,18 @@
 
         </div>
       </div>
+
+
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
+              <ul>
+                  <li>
+                      <a id="saved" target="_blank" href="#">
+                        Copy Link
+                      </a>
+                    </li>
+              </ul>            
             <ul>
               <li>
                 <a href="">
@@ -448,6 +457,7 @@
                 </a>
               </li>
             </ul>
+
           </nav>
           <div class="copyright float-right">
             &copy;
@@ -624,15 +634,20 @@
         var teams = [q1,q2,q3,q4];
         var b64 = window.btoa(JSON.stringify(teams));
         var link = window.location.href.replace("#","") + "?teams=" + b64;
+
+        $("#saved").attr("href",link);
         copyToClipboard('#p1');
     }
 
     function load_teams() {
+        var encodedData = "W1t7Im5yIjowLCJuYW1lIjoiQUJFTCJ9LHsibnIiOjEsIm5hbWUiOiJKRUxNRVIifSx7Im5yIjoyLCJuYW1lIjoiUk9CSSJ9LHsibnIiOjMsIm5hbWUiOiJDQVNUT1IifSx7Im5yIjo0LCJuYW1lIjoiRU5aTyJ9LHsibnIiOjUsIm5hbWUiOiJUSElKTUVOIn1dLFt7Im5yIjowLCJuYW1lIjoiVEhJSk1FTiJ9LHsibnIiOjEsIm5hbWUiOiJKRUxNRVIifSx7Im5yIjoyLCJuYW1lIjoiUk9CSSJ9LHsibnIiOjMsIm5hbWUiOiJBQkVMIn0seyJuciI6NCwibmFtZSI6IkNBU1RPUiJ9LHsibnIiOjUsIm5hbWUiOiJUSElKTUVOIn1dLFt7Im5yIjowLCJuYW1lIjoiVEhJSk1FTiJ9LHsibnIiOjEsIm5hbWUiOiJKRUxNRVIifSx7Im5yIjoyLCJuYW1lIjoiVklOQ0UifSx7Im5yIjozLCJuYW1lIjoiUk9CSSJ9LHsibnIiOjQsIm5hbWUiOiJBQkVMIn0seyJuciI6NSwibmFtZSI6IlRISUpNRU4ifV0sW3sibnIiOjAsIm5hbWUiOiJWSU5DRSJ9LHsibnIiOjEsIm5hbWUiOiJKRUxNRVIifSx7Im5yIjoyLCJuYW1lIjoiQ0FTVE9SIn0seyJuciI6MywibmFtZSI6IkVOWk8ifSx7Im5yIjo0LCJuYW1lIjoiRU5aTyJ9LHsibnIiOjUsIm5hbWUiOiJST0JJIn1dXQ==";
         var teamParam = getURLParameter("teams");
         if (teamParam == undefined) {
-            //return;
+            return;
         }
-        var encodedData = "W1t7Im5yIjowLCJuYW1lIjoiQUJFTCJ9LHsibnIiOjEsIm5hbWUiOiJKRUxNRVIifSx7Im5yIjoyLCJuYW1lIjoiUk9CSSJ9LHsibnIiOjMsIm5hbWUiOiJDQVNUT1IifSx7Im5yIjo0LCJuYW1lIjoiRU5aTyJ9LHsibnIiOjUsIm5hbWUiOiJUSElKTUVOIn1dLFt7Im5yIjowLCJuYW1lIjoiVEhJSk1FTiJ9LHsibnIiOjEsIm5hbWUiOiJKRUxNRVIifSx7Im5yIjoyLCJuYW1lIjoiUk9CSSJ9LHsibnIiOjMsIm5hbWUiOiJBQkVMIn0seyJuciI6NCwibmFtZSI6IkNBU1RPUiJ9LHsibnIiOjUsIm5hbWUiOiJUSElKTUVOIn1dLFt7Im5yIjowLCJuYW1lIjoiVEhJSk1FTiJ9LHsibnIiOjEsIm5hbWUiOiJKRUxNRVIifSx7Im5yIjoyLCJuYW1lIjoiVklOQ0UifSx7Im5yIjozLCJuYW1lIjoiUk9CSSJ9LHsibnIiOjQsIm5hbWUiOiJBQkVMIn0seyJuciI6NSwibmFtZSI6IlRISUpNRU4ifV0sW3sibnIiOjAsIm5hbWUiOiJWSU5DRSJ9LHsibnIiOjEsIm5hbWUiOiJKRUxNRVIifSx7Im5yIjoyLCJuYW1lIjoiQ0FTVE9SIn0seyJuciI6MywibmFtZSI6IkVOWk8ifSx7Im5yIjo0LCJuYW1lIjoiRU5aTyJ9LHsibnIiOjUsIm5hbWUiOiJST0JJIn1dXQ==";
+        else {
+          encodedData = teamParam;
+        }
         var decoded = window.atob(encodedData);
         var teams = JSON.parse(decoded);
 
