@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SVC Field</title>
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <style>
+        html { 
+            background: url(img/henrique-macedo-457119-unsplash.jpg) no-repeat center center fixed;;           
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        @media only screen 
+        and (min-device-width: 320px) 
+        and (max-device-width: 667px) 
+        { 
+            .ui-draggable { width:64px;}
+        }
+
+    </style>
+</head>
+<body>
+    <div id="field">
+        <img src="img/thijmen.png" alt="Thijmen" />
+        <img src="img/castor.png" alt="Castor" />
+        <img src="img/vince.png" alt="Vince" />
+        <img src="img/luuk.png" alt="Luuk" />
+        <img src="img/jelmer.png" alt="Jelmer" />
+        <img src="img/enzo.png" alt="Enzo" />
+        <img src="img/abel.png"  alt="Abel" />   
+        <img src="img/robi.png"  alt="Robi" />   
+    </div>
+
+    <div style="position:absolute;bottom:0px;width:100%; padding:20px">
+        <button>Quarter 1</button>
+        <button>Quarter 2</button>
+        <button>Quarter 3</button>
+        <button>Quarter 4</button>
+        <button onclick="save_players()">Save</button>
+
+    </div>
+</body>
+<script>
+    $("img").draggable();
+    var team = [];
+
+    function randomIntFromInterval(min,max) // min and max included
+    {
+        return Math.floor(Math.random()*(max-min+1)+min);
+    }
+
+    function test() {
+        
+        $("img").each(function(e,i) {
+            var name = i.getAttribute("alt");
+            var image = i.getAttribute("src");
+            var rect = i.getBoundingClientRect();
+            var player = { name: name, image : image, top: rect.top, left:rect.left };
+            team.push(player);
+            //console.log(name, image,rect.top, rect.right, rect.bottom, rect.left);
+        });
+    }
+
+    function test1() {
+        $("img").each(function(e,i) {
+            var name = i.getAttribute("alt");
+            var image = i.getAttribute("src");
+            var rect = i.getBoundingClientRect();
+            i.style.marginLeft = rect.left + randomIntFromInterval(0, 100) + "px";
+            i.style.maringTop = rect.top + randomIntFromInterval(0,100) + "px";
+            //var player = { name: name, image : image, top: rect.top, left:rect.left };
+            //team.push(player);
+            //console.log(name, image,rect.top, rect.right, rect.bottom, rect.left);
+        });
+    }
+
+    function save_players() {
+        var team = [];
+        $("img").each(function(e,i) {
+            var name = i.getAttribute("alt");
+            var image = i.getAttribute("src");
+            var rect = i.getBoundingClientRect();
+            //var player = { name: name, image : image, top: rect.top, left:rect.left };
+            var player = { name: name, image : image, top: 30, left:30 };
+            team.push(player);
+        });
+        console.log(JSON.stringify(team));
+        
+    }
+
+    function load_players(){
+        $("img").remove();
+        [{"name":"Thijmen","image":"img/thijmen.png","top":30,"left":30},{"name":"Castor","image":"img/castor.png","top":30,"left":30},{"name":"Vince","image":"img/vince.png","top":30,"left":30},{"name":"Luuk","image":"img/luuk.png","top":30,"left":30},{"name":"Jelmer","image":"img/jelmer.png","top":30,"left":30},{"name":"Enzo","image":"img/enzo.png","top":30,"left":30},{"name":"Abel","image":"img/abel.png","top":30,"left":30},{"name":"Robi","image":"img/robi.png","top":30,"left":30}];
+        var html = "";
+        $.each(team,function(br,player){
+            html += `<img src="${player.image}" alt="${player.name}" style='top:${player.top}px;left:${player.left}px;width:32px' />`
+        });
+        
+        document.getElementById("field").innerHTML = html;
+        $("img").draggable();
+        console.log(html);
+
+    }
+
+    $(document).ready(function(){
+        //load_players();
+       
+    });
+</script>
+</html>
