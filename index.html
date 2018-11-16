@@ -23,6 +23,32 @@
   <link href="css/material-dashboard.min.css?v=2.1.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="css/demo.css" rel="stylesheet" />
+
+  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAQoDBBrQJ_VgKPSo-E3Sv_KmZV-Sz7PkE",
+      authDomain: "agilema-87fe9.firebaseapp.com",
+      databaseURL: "https://agilema-87fe9.firebaseio.com",
+      projectId: "agilema-87fe9",
+      storageBucket: "agilema-87fe9.appspot.com",
+      messagingSenderId: "989393887417"
+    };
+    firebase.initializeApp(config);
+    //console.log(firebase.app().name);  // "[DEFAULT]"
+    // Use the shorthand notation to retrieve the default app's services
+    var defaultStorage = firebase.storage();
+    var defaultDatabase = firebase.database();
+    var ref = defaultDatabase.ref("/teams");
+    
+    // Save 
+    //ref.set({ example:1203123})
+    //console.log(ref);
+
+    // ref.once("value").then(function(result){console.log(result.val());});
+
+  </script>  
 </head>
 
 <body class="">
@@ -35,14 +61,17 @@
         Tip 2: you can also add an image using data-image tag
     -->
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+        <a href="http://svc08.nl/" class="simple-text logo-normal">
           DASHBOARD
         </a>
+        <div style="width:100%;text-align:center;">
+          <img style="width:100px" src="img/logo.png" />
+        </div>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item active  ">
-            <a class="nav-link" href="foot.html">
+            <a class="nav-link" href="index.html">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
@@ -431,7 +460,7 @@
               <ul>
                   <li>
                       <a id="saved" target="_blank" href="#">
-                        Copy Link
+                        Open New Window
                       </a>
                     </li>
               </ul>            
@@ -550,11 +579,7 @@
                 <span>Save</span>
             </a>
         </li>
-        <li class="button-container text-center">
-            <div>
-                <img style="width:100px" src="img/logo.png" />
-            </div>
-        </li>
+
         <li class="button-container">
             <p id="p1" style="width:100%;overflow: hidden;"></p>
         </li>
@@ -596,11 +621,6 @@
         $temp.remove();
     }
 
-
-    function set_player(name) {
-        
-    }
-
     function save_team() {
         var teams = [];
         var q1 = [];
@@ -632,29 +652,47 @@
             q4.push({nr, name});
         });
         var teams = [q1,q2,q3,q4];
-        var b64 = window.btoa(JSON.stringify(teams));
-        var link = window.location.href.replace("#","") + "?teams=" + b64;
+        var teamid = makeid();
+        ref.child(teamid).set(teams);
 
+        var link = window.location.href.replace("#","") + "?teams=" + teamid;
         $("#saved").attr("href",link);
         copyToClipboard('#p1');
     }
 
+    function makeid() {
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      for (var i = 0; i < 5; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+      return text;
+    }
+
+    function load_aux(teams) {
+      var nr = 1;
+          teams.forEach(function(team){
+              load_team(nr,team)
+              nr ++;
+          });
+    }
+
     function load_teams() {
-        var encodedData = "W1t7Im5yIjowLCJuYW1lIjoiQUJFTCJ9LHsibnIiOjEsIm5hbWUiOiJKRUxNRVIifSx7Im5yIjoyLCJuYW1lIjoiUk9CSSJ9LHsibnIiOjMsIm5hbWUiOiJDQVNUT1IifSx7Im5yIjo0LCJuYW1lIjoiRU5aTyJ9LHsibnIiOjUsIm5hbWUiOiJUSElKTUVOIn1dLFt7Im5yIjowLCJuYW1lIjoiVEhJSk1FTiJ9LHsibnIiOjEsIm5hbWUiOiJKRUxNRVIifSx7Im5yIjoyLCJuYW1lIjoiUk9CSSJ9LHsibnIiOjMsIm5hbWUiOiJBQkVMIn0seyJuciI6NCwibmFtZSI6IkNBU1RPUiJ9LHsibnIiOjUsIm5hbWUiOiJUSElKTUVOIn1dLFt7Im5yIjowLCJuYW1lIjoiVEhJSk1FTiJ9LHsibnIiOjEsIm5hbWUiOiJKRUxNRVIifSx7Im5yIjoyLCJuYW1lIjoiVklOQ0UifSx7Im5yIjozLCJuYW1lIjoiUk9CSSJ9LHsibnIiOjQsIm5hbWUiOiJBQkVMIn0seyJuciI6NSwibmFtZSI6IlRISUpNRU4ifV0sW3sibnIiOjAsIm5hbWUiOiJWSU5DRSJ9LHsibnIiOjEsIm5hbWUiOiJKRUxNRVIifSx7Im5yIjoyLCJuYW1lIjoiQ0FTVE9SIn0seyJuciI6MywibmFtZSI6IkVOWk8ifSx7Im5yIjo0LCJuYW1lIjoiRU5aTyJ9LHsibnIiOjUsIm5hbWUiOiJST0JJIn1dXQ==";
         var teamParam = getURLParameter("teams");
-        if (teamParam == undefined) {
+        if ((teamParam == undefined)||(teamParam.length===0)) {
             return;
         }
-        else {
-          encodedData = teamParam;
-        }
-        var decoded = window.atob(encodedData);
-        var teams = JSON.parse(decoded);
-
-        var nr = 1;
-        teams.forEach(function(team){
-            load_team(nr,team)
-            nr ++;
+        
+        console.log;
+        var teamref = defaultDatabase.ref("/teams/"+teamParam);
+        ref.once("value").then(function(result){
+          var teams =  result.val()[teamParam];
+          var nr = 1;
+          teams.forEach(function(team){
+              load_team(nr,team)
+              nr ++;
+          });
         });
     }
 
@@ -840,5 +878,4 @@
     });
   </script>
 </body>
-
 </html>
